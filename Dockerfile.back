@@ -1,0 +1,19 @@
+FROM python:3.8-alpine
+ENV PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+HEALTHCHECK --interval=60s --timeout=5s --retries=3 CMD ["wget","-nv","-t1","--spider","http://localhost:8000/admin"]
+
+COPY backend/requirements.txt .
+RUN \
+  apk add --no-cache libxml2 libxslt libxml2-dev libxslt-dev postgresql-libs && \
+  apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
+  pip install -r requirements.txt --no-cache-dir && \
+  apk --purge del .build-deps
+
+COPY backend .
+COPY check-postgres.py .
+# RUN chmod +x check-postgres.py
+
+CMD python check-postgres.py && python manage.py runserver 0.0.0.0:8000
