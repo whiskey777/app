@@ -16,7 +16,7 @@ let buildMetals = (metals) => {
         let metal = metals[i]
         
         let metalCard = `
-                <div class = >
+                <div class = "metal--card">
                     <p>${metal.name}</p>
                 </div>    
         `
