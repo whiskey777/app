@@ -6,13 +6,13 @@ back on start checking if DB available, then trying to init if empty
 
 basic test API created.
 
+update DB on start script created.
+
 ## to do
 
 superuser creation on empty DB (not even sure if I need that, everything will go through API in future, but could be useful for tests)
 
-update DB on start (and on schedule? cron? can jango do it for me?)
-- parsing XML file 
-- upload data in postgres DB
+Scheduled updates (daily) for metals table
 
 create API 
 - GET all object
